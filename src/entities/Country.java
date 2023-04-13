@@ -1,22 +1,33 @@
 package entities;
 
 public class Country {
-    String Name; //pk
+    //Attributes of class and columns of the table
+    String Code; //Primary Key
+    String Name; 
     String Continent;
     String Region;
-    Integer SurfaceArea;
+    Double SurfaceArea;
     Integer IndepYear;
     Integer Population;
-    Integer LifeExpectancy;
-    Integer GNP;
-    Integer GNPOld;
+    Double LifeExpectancy;
+    Double GNP;
+    Double GNPOld;
     String LocalName;
     String GovernmentForm;
     String HeadOfState;
     Integer Capital;
     String Code2;
 
+    //Creating getter and setters for the attributes
+    public String getCode()
+    {
+        return Code;
+    }
 
+    public void setCode(String code)
+    {
+        this.Code = code;
+    }
     public String getName()
     {
         return Name;
@@ -47,12 +58,12 @@ public class Country {
         this.Region = region;
     }
 
-    public Integer getSurfaceArea()
+    public Double getSurfaceArea()
     {
         return SurfaceArea;
     }
 
-    public void setSurfaceArea(Integer surfaceArea)
+    public void setSurfaceArea(Double surfaceArea)
     {
         this.SurfaceArea = surfaceArea;
     }
@@ -77,34 +88,34 @@ public class Country {
         this.Population = population;
     }
 
-    public Integer getLifeExpectancy()
+    public Double getLifeExpectancy()
     {
         return LifeExpectancy;
     }
 
-    public void setLifeExpectancy(Integer lifeExpectancy)
+    public void setLifeExpectancy(Double lifeExpectancy)
     {
         this.LifeExpectancy = lifeExpectancy;
     }
 
-    public Integer getGNP()
+    public Double getGNP()
     {
         return GNP;
     }
 
-    public void setGNP(Integer gnp)
+    public void setGNP(double d)
     {
-        this.GNP = gnp;
+        this.GNP = d;
     }
 
-    public Integer getGNPOld()
+    public Double getGNPOld()
     {
         return GNPOld;
     }
 
-    public void setGNPOld(Integer gnpOld)
+    public void setGNPOld(double d)
     {
-        this.GNPOld = gnpOld;
+        this.GNPOld = d;
     }
 
     public String getLocalName()
@@ -157,15 +168,18 @@ public class Country {
         this.Code2 = code2;
     }
 
+    /**
+     * Enable to see all the values inside the entity
+     */
     @Override
     public String toString()
     {
-        return "Country [Name=" + Name + ", Continent=" + Continent + 
+        return  "Country [Code" + Code+ "Name=" + Name + ", Continent=" + Continent + 
                 ", Region=" + Region + ", SurfaceArea="+ SurfaceArea +
                 ", IndepYear=" + IndepYear + ", Population=" + Population+
                 ", Life Expectancy=" + LifeExpectancy + ", GNP=" + GNP+
                 ", GNPOld=" + GNPOld + ", LocalName=" + LocalName + 
                 ", GovernmentForm=" + GovernmentForm + ", HeadOfState=" + HeadOfState+
-                ", Capital=" + Capital + ", Code2=" + Code2;
+                ", Capital=" + Capital + ", Code2=" + Code2 + "]";
     }
 }
