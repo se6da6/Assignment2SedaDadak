@@ -22,6 +22,11 @@ public class App
         List<City> cityList;
         //Creating arraylist for  the country class
         List<Country> countryList;
+        List<City> cityFindByCountryCodeList;
+        List<Country> countryFindByRegionList;
+        List<City> cityFindByNameList;
+        List<City> cityFindByPopulationList;
+        List<Country> countryFindByNameList;
 
 
          try (Connection connection = Database.getDatabaseConnection();
@@ -60,7 +65,7 @@ public class App
                 System.out.println(country);
             }
             
-            //Insert 
+            //Inserting new city
             City insertCity1 = new City();
             insertCity1.setCountryCode("CAN");
             insertCity1.setDistrict("Ontario");
@@ -69,11 +74,49 @@ public class App
 
             cityDao.insert(insertCity1);
 
+            //Calling findByCountryCode method
+           cityFindByCountryCodeList = cityDao.findByCountryCode("CAN");
+           System.out.println("Cities name by country code:");
+            for(City city: cityFindByCountryCodeList)
+            {
+                System.out.println(city);
+            }
+
+            //Calling the findByRegionName method
+            countryFindByRegionList = countryDao.findCountryByRegion("Central Africa");
+            System.out.println("Countries name by region:");
+            for(Country country:countryFindByRegionList)
+            {
+                System.out.println(country);
+            }
+
+           //Calling findCityByName method
+            cityFindByNameList = cityDao.findByCityName("Tilburg");
+            System.out.println("Cities by city name:");
+            for(City city: cityFindByNameList)
+            {
+                System.out.println(city);
+            }
+
+              //Calling findCityByPopulation method
+            cityFindByPopulationList = cityDao.findByPopulation();
+            System.out.println("Cities name by population:");
+            for(City city: cityFindByPopulationList)
+            {
+                System.out.println(city);
+            }
+            //Calling findCountryByName method
+            countryFindByNameList = countryDao.findCountryByName("Angola");
+            System.out.println("Countries name by country name:");
+            for(Country country:countryFindByNameList)
+            {
+                System.out.println(country);
+            }
             /** 
              * Creating an instance of Country class to insert into 
              * Country entity and inserting new data
              * */
-            Country insertCountry = new Country();
+            /*Country insertCountry = new Country();
             insertCountry.setCapital(1);
             insertCountry.setCode("TRK");
             insertCountry.setContinent("Asia");
@@ -98,18 +141,19 @@ public class App
             * calling FindById method and  execute update method
             */
            
-            Country updateCountry = new Country();
+           /* Country updateCountry = new Country();
             updateCountry = countryDao.findById("TRK");
-            updateCountry.setPopulation(85000000);
-            Boolean success = countryDao.update(updateCountry);
+            System.out.println(updateCountry);
+            //updateCountry.setPopulation(85000000);
+             Boolean success = countryDao.update(updateCountry);
 
             if(success==true)
             {
                 System.out.println("Country entity successfully updated!");
-            }
+            }*/
 
             //Executing Delete method on the recently inserted data
-            Boolean succeeded = countryDao.delete("TRK");
+           /*  Boolean succeeded = countryDao.delete("TRK");
 
             if(succeeded==true)
             {
@@ -117,7 +161,7 @@ public class App
             }
             else{
                 System.out.println("delete");
-            }
+            }*/
 
 
         

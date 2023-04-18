@@ -1,7 +1,7 @@
 package entities;
 
 public class City {
-    Integer ID;//PK
+    Integer ID;//Primary Key
     String Name;
     String CountryCode;
     String District;
@@ -60,7 +60,7 @@ public class City {
     @Override
     public String toString(){
         return "City [CountryCode=" + CountryCode + ", District=" + District + ", ID=" 
-                + ID + ", Name=" + Name + ", Population=" + "]";
+                + ID + ", Name=" + Name + ", Population=" + Population + "]";
     }
     
 

@@ -47,6 +47,105 @@ public class CityDao implements Dao<City/*Entity name*/, Integer/*pk type */>{
         return cities;//returning our arraylist
     }
 
+    /**
+     * findByCityName method recieves countryCode as a parameter and 
+     * it returns the arraylist of the city arraylist which consist of the requiered data.
+     * The method shows the city names which has the same countryCode 
+     *  
+    */
+    public List<City> findByCountryCode(String countryCode)
+    {
+        List<City> cities = new ArrayList<>();
+        
+        String select ="SELECT * FROM city WHERE countryCode=? ";
+        try(PreparedStatement ps = connection.prepareStatement(select);)
+        {
+            ps.setString(1, countryCode);
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                City city = new City();
+                city.setCountryCode(result.getString("CountryCode"));
+                city.setDistrict(result.getString("District"));
+                city.setID (result.getInt("ID"));
+                city.setName(result.getString("Name"));
+                city.setPopulation(result.getInt("Population"));
+                cities.add(city);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return cities;
+       
+    }
+    /**
+     * findByCityName method recieves name of the city as a parameter
+     * and it returns the arraylist of the city arraylist which consist of the requiered data.
+     * Method shows the city's information in accordance with the specifis city name
+     */
+    public List<City> findByCityName(String name)
+    {
+        List<City> cities = new ArrayList<>();
+        City city = new City();
+        String select ="SELECT * FROM city WHERE name=? ";
+        try(PreparedStatement ps = connection.prepareStatement(select);)
+        {
+            ps.setString(1, name);
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                city.setCountryCode(result.getString("CountryCode"));
+                city.setDistrict(result.getString("District"));
+                city.setID (result.getInt("ID"));
+                city.setName(result.getString("Name"));
+                city.setPopulation(result.getInt("population"));
+                
+                cities.add(city);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return cities;
+       
+    }
+
+    /**
+     * findByPopulation method does not recieve any parameter and
+     * it returns the arraylist of the city arraylist which consist of cities with population greater than 1 million.
+     *  
+     */
+    public List<City> findByPopulation()
+    {
+        List<City> cities = new ArrayList<>();
+        
+        String select ="SELECT * FROM city WHERE population > 1000000 ";
+        try(PreparedStatement ps = connection.prepareStatement(select);)
+        {
+            
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                City city = new City();
+                city.setCountryCode(result.getString("CountryCode"));
+                city.setDistrict(result.getString("District"));
+                city.setID (result.getInt("ID"));
+                city.setName(result.getString("Name"));
+                city.setPopulation(result.getInt("Population"));
+                cities.add(city);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return cities;
+       
+    }
+    
     public void insert(City city)
     {
         try(Statement statement = connection.createStatement())

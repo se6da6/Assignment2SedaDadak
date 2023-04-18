@@ -63,6 +63,87 @@ public class CountryDao implements Dao<Country,String> {
         return countries;
 
     }
+    /**
+     * findCountryByRegion recieves the region as a paramater
+     * and it returns the arraylist which consist of the requiered data.
+     * The method aim to reach the country names in the same region.
+     */
+    public List<Country> findCountryByRegion(String region)
+    {
+        List<Country> countries = new ArrayList<>();
+        Country country = new Country();
+        String select ="SELECT * FROM country WHERE region = ?";
+        try(PreparedStatement ps = connection.prepareStatement(select);)
+        {
+            ps.setString(1, region);
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                country.setCode(result.getString("Code"));
+                country.setName(result.getString("Name"));
+                country.setCapital(result.getInt("Capital"));
+                country.setContinent(result.getString("Continent"));
+                country.setCode2(result.getString("Code2"));
+                country.setGNP(result.getFloat("GNP"));
+                country.setGNPOld(result.getFloat("GNPOld"));
+                country.setGovenrmentForm(result.getString("GovernmentForm"));
+                country.setHeadOfState(result.getString("HeadOfState"));
+                country.setIndepYear(result.getInt("IndepYear"));
+                country.setLifeExpectancy(result.getDouble("LifeExpectancy"));
+                country.setLocalName(result.getString("LocalName"));
+                country.setPopulation(result.getInt("Population"));
+                country.setRegion(result.getString("Region"));
+                country.setSurfaceArea(result.getDouble("SurfaceArea"));
+                countries.add(country);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return countries;
+    }
+    /**
+     * findCountryByName method recieves name of the country as a parameter
+     * and it returns the arraylist of the country arraylist which consist of the requiered data.
+     * Method shows the country's information in accordance with the specifis country name
+     */
+    public List<Country> findCountryByName(String name)
+    {
+        List<Country> countries = new ArrayList<>();
+        Country country = new Country();
+        String select ="SELECT * FROM country WHERE name = ?";
+        try(PreparedStatement ps = connection.prepareStatement(select);)
+        {
+            ps.setString(1, name);
+            ResultSet result = ps.executeQuery();
+            while(result.next())
+            {
+                country.setCode(result.getString("Code"));
+                country.setName(result.getString("Name"));
+                country.setCapital(result.getInt("Capital"));
+                country.setContinent(result.getString("Continent"));
+                country.setCode2(result.getString("Code2"));
+                country.setGNP(result.getFloat("GNP"));
+                country.setGNPOld(result.getFloat("GNPOld"));
+                country.setGovenrmentForm(result.getString("GovernmentForm"));
+                country.setHeadOfState(result.getString("HeadOfState"));
+                country.setIndepYear(result.getInt("IndepYear"));
+                country.setLifeExpectancy(result.getDouble("LifeExpectancy"));
+                country.setLocalName(result.getString("LocalName"));
+                country.setPopulation(result.getInt("Population"));
+                country.setRegion(result.getString("Region"));
+                country.setSurfaceArea(result.getDouble("SurfaceArea"));
+                countries.add(country);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        return countries;
+    }
+
     
     /**
      * Insert method recieve an object of Country class
